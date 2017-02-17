@@ -10,7 +10,7 @@ const models = require('../src/models');
 const controllers = require('../src/controllers');
 const routes = require('../src/routes');
 
-debug('execute all process');
+debug('init apogeu');
 models()
   .then(controllers)
   .then(routes)

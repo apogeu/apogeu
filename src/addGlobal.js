@@ -3,6 +3,6 @@ const getBase = require('./getBase');
 
 module.exports = (path, name) => {
   const pathBase = getBase(path);
-  global[name] = require(pathBase);
   debug(`add global : ${name} - ${pathBase}`);
+  global[name] = require(pathBase);
 };

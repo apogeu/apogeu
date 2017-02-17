@@ -8,9 +8,8 @@
     "apogeu": "./bin/apogeu"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/apogeu",
-    "debug": "DEBUG=* node ./bin/apogeu",
+    "start": "TEST_PATH=template node ./bin/apogeu",
+    "debug": "TEST_PATH=template DEBUG=apogeu:* node ./bin/apogeu",
     "eslint": "eslint ./bin/* ./src/*"
   },
   "files": [
