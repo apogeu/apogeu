@@ -22,7 +22,7 @@ const exportModel = (model, name) => {
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    readDir(paths.models)
+    readDir(paths.models, '.js')
       .then(models => {
         models.forEach(model => exportModel(model, resolveModelName(model)));
         resolve();

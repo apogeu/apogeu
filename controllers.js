@@ -21,7 +21,7 @@ const exportController = (controller, name) => {
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    readDir(paths.controllers)
+    readDir(paths.controllers, '.js')
       .then(controllers => {
         controllers.forEach(controller => exportController(controller, resolveControllerName(controller)));
         resolve();

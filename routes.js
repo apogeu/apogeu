@@ -2,6 +2,7 @@ const debug = require('debug')('phosphoros:routes');
 const Promise = require('bluebird');
 const methods = require('methods');
 const express = require('express');
+const paths = require('./paths');
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ const isFunction = (func) => {
 
 const getRoutes = () => {
   debug('get routes');
-  return require('./config/routes');
+  return require(paths.config.routes);
 };
 
 const resolveAddress = (address, routes) => {
