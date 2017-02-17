@@ -1,26 +1,34 @@
-const debug = require('debug')('index');
+const debug = require('debug')('phosphoros:index');
 const Promise = require('bluebird');
-const http = require('http');
+const express = require('express');
+const app = express();
 
 const models = require('./models');
+const controllers = require('./controllers');
+const routes = require('./routes');
 
 debug('execute all process');
-Promise
-  .all([
-    models(),
-  ])
-  .then(() => {
-    const hostname = '127.0.0.1';
+models()
+  .then(controllers)
+  .then(routes)
+  .then((router) => {
+    app.use(router);
     const port = 3000;
-
-    const server = http.createServer((req, res) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end(`ClientModel.foo: ${ClientModel.foo}\n`);
-    });
-
-    server.listen(port, hostname, () => {
-      console.log(`Server running at http://${hostname}:${port}/`);
-    });
+    app.listen(port, function () {
+      console.log(`Phosphoros listening on port ${port}`);
+    })
   })
-  .catch(console.error)
+  .catch(console.error);
+
+// Promise
+//   .some([
+//     models(),
+//     controllers(),
+//   ])
+//   .then(() => {
+//     const port = 3000;
+//     app.listen(port, function () {
+//       console.log(`Phosphoros listening on port ${port}`);
+//     })
+//   })
+//   .catch(console.error)
