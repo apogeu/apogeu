@@ -1,4 +1,4 @@
-const debug = require('debug')('phosphoros:addGlobal');
+const debug = require('debug')('apogeu:addGlobal');
 const getBase = require('./getBase');
 
 module.exports = (path, name) => {

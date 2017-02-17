@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('phosphoros:bin');
+const debug = require('debug')('apogeu:bin');
 const express = require('express');
 const log = require('winston');
 
@@ -18,7 +18,7 @@ models()
     app.use(router);
     const port = 3000;
     app.listen(port, () => {
-      log.info(`Phosphoros listening on port ${port}`);
+      log.info(`Apogeu listening on port ${port}`);
     });
   })
   .catch(log.error);

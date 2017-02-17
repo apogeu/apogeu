@@ -1,4 +1,4 @@
-const debug = require('debug')('phosphoros:models');
+const debug = require('debug')('apogeu:models');
 const path = require('path');
 const pluralize = require('pluralize');
 const capitalize = require('capitalize');

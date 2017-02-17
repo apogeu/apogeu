@@ -1,4 +1,4 @@
-const debug = require('debug')('phosphoros:readDir');
+const debug = require('debug')('apogeu:readDir');
 const fs = require('fs');
 const path = require('path');
 
