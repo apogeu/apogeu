@@ -2,5 +2,5 @@
 
 module.exports = {
   'get /clients': ClientsController.foo,
-  'get /clients/bar': ClientsController.bar,
+  '/clients/bar': ClientsController.bar,
 };
