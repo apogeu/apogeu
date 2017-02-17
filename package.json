@@ -2,13 +2,25 @@
   "name": "phosphoros-test",
   "version": "1.0.0",
   "description": "",
+  "main": "bin/phosphoros",
+  "preferGlobal": true,
+  "bin": {
+    "phosphoros": "./bin/phosphoros"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "debug": "DEBUG=* node index.js"
+    "start": "node ./bin/phosphoros",
+    "debug": "DEBUG=* node ./bin/phosphoros"
   },
+  "files": [
+    "bin/",
+    "config/",
+    ".gitignore",
+    "README.md",
+    "LICENSE"
+  ],
   "author": "Daniel Rôhers Moura <rohersmoura@gmail.com> (https://github.com/danielrohers)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.7",
     "capitalize": "^1.0.0",
