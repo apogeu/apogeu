@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/phosphoros",
-    "debug": "DEBUG=* node ./bin/phosphoros"
+    "debug": "DEBUG=* node ./bin/phosphoros",
+    "eslint": "eslint ./bin/* ./src/*"
   },
   "files": [
     "bin/",
@@ -27,6 +28,12 @@
     "debug": "^2.6.1",
     "express": "^4.14.1",
     "methods": "^1.1.2",
-    "pluralize": "^3.1.0"
+    "pluralize": "^3.1.0",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0"
   }
 }

@@ -19,13 +19,14 @@ const exportController = (controller, name) => {
   addGlobal(`${paths.controllers}/${controller}`, name);
 };
 
-module.exports = () => {
-  return new Promise((resolve, reject) => {
-    readDir(paths.controllers, '.js')
-      .then(controllers => {
-        controllers.forEach(controller => exportController(controller, resolveControllerName(controller)));
-        resolve();
-      })
-      .catch(reject);
-  });
-}
+module.exports = () => new Promise((resolve, reject) => {
+  readDir(paths.controllers, '.js')
+    .then((controllers) => {
+      controllers.forEach((controller) => {
+        const controllerName = resolveControllerName(controller);
+        return exportController(controller, controllerName);
+      });
+      resolve();
+    })
+    .catch(reject);
+});

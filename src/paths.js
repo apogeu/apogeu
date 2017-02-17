@@ -4,4 +4,4 @@ module.exports = {
   config: {
     routes: './config/routes',
   },
-}
+};

@@ -1,5 +1,4 @@
 const debug = require('debug')('phosphoros:models');
-const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
 const capitalize = require('capitalize');
@@ -20,13 +19,11 @@ const exportModel = (model, name) => {
   addGlobal(`${paths.models}/${model}`, name);
 };
 
-module.exports = () => {
-  return new Promise((resolve, reject) => {
-    readDir(paths.models, '.js')
-      .then(models => {
-        models.forEach(model => exportModel(model, resolveModelName(model)));
-        resolve();
-      })
-      .catch(reject);
-  });
-}
+module.exports = () => new Promise((resolve, reject) => {
+  readDir(paths.models, '.js')
+    .then((models) => {
+      models.forEach(model => exportModel(model, resolveModelName(model)));
+      resolve();
+    })
+    .catch(reject);
+});

@@ -8,17 +8,11 @@ const getBase = require('./getBase');
 
 const router = express.Router();
 
-const isMethod = (method) => {
-  return methods.includes(method);
-}
+const isMethod = method => methods.includes(method);
 
-const isRoute = (route) => {
-  return route[0] === '/';
-};
+const isRoute = route => route.charAt(0) === '/';
 
-const isFunction = (func) => {
-  return typeof func === 'function';
-};
+const isFunction = func => typeof func === 'function';
 
 const getRoutes = () => {
   debug('get routes');
@@ -30,7 +24,7 @@ const resolveAddress = (address, routes) => {
   const splited = address.split(' ');
   let method = splited[0];
   let route = splited[1];
-  let target = routes[address];
+  const target = routes[address];
 
   if (!isMethod(method) && isRoute(method)) {
     debug(`method ${method} is route`);
@@ -51,13 +45,15 @@ const createRoute = (data) => {
   router[method](route, target);
 };
 
-module.exports = () => {
-  return new Promise((resolve, reject) => {
+module.exports = () => new Promise((resolve, reject) => {
+  try {
     const routes = getRoutes();
     for (const address in routes) {
       const data = resolveAddress(address, routes);
       createRoute(data);
     }
     resolve(router);
-  });
-};
+  } catch (e) {
+    reject(e);
+  }
+});

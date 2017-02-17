@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const debug = require('debug')('phosphoros:bin');
-const Promise = require('bluebird');
 const express = require('express');
+const log = require('winston');
 
 const app = express();
 
@@ -17,8 +17,8 @@ models()
   .then((router) => {
     app.use(router);
     const port = 3000;
-    app.listen(port, function () {
-      console.log(`Phosphoros listening on port ${port}`);
-    })
+    app.listen(port, () => {
+      log.info(`Phosphoros listening on port ${port}`);
+    });
   })
-  .catch(console.error);
+  .catch(log.error);
