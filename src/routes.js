@@ -1,5 +1,4 @@
 const debug = require('debug')('apogeu:routes');
-const Promise = require('bluebird');
 const methods = require('methods');
 const express = require('express');
 
