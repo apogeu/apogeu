@@ -8,8 +8,8 @@
     "apogeu": "./bin/apogeu"
   },
   "scripts": {
-    "start": "TEST_PATH=template node ./bin/apogeu",
-    "debug": "TEST_PATH=template DEBUG=apogeu:* node ./bin/apogeu",
+    "start": "TEMPLATE=template node ./bin/apogeu --start",
+    "start:debug": "TEMPLATE=template DEBUG=apogeu:* node ./bin/apogeu --start",
     "eslint": "eslint ./bin/* ./src/*"
   },
   "files": [
@@ -23,10 +23,15 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.7",
+    "body-parser": "^1.16.1",
     "capitalize": "^1.0.0",
+    "commander": "^2.9.0",
     "debug": "^2.6.1",
     "express": "^4.14.1",
+    "helmet": "^3.4.0",
     "methods": "^1.1.2",
+    "mongoose": "^4.8.3",
+    "morgan": "^1.8.1",
     "pluralize": "^3.1.0",
     "winston": "^2.3.1"
   },
