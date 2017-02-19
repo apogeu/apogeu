@@ -10,3 +10,4 @@ rules:
   consistent-return: off
   guard-for-in: off
   no-restricted-syntax: off
+  camelcase: off
