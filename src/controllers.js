@@ -1,8 +1,7 @@
-const debug = require('debug')('apogeu:models');
+const debug = require('debug')('apogeu:controllers');
 const path = require('path');
 const pluralize = require('pluralize');
 const capitalize = require('capitalize');
-const Promise = require('bluebird');
 
 const paths = require('./paths');
 const addGlobal = require('./addGlobal');
