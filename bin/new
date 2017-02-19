@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+const debug = require('debug')('apogeu:new');
+
+module.exports = (projectName) => {
+  console.log(projectName);
+};
