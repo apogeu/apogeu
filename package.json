@@ -8,8 +8,8 @@
     "apogeu": "./bin/apogeu"
   },
   "scripts": {
-    "start": "TEMPLATE=template node ./bin/apogeu --start",
-    "start:debug": "TEMPLATE=template DEBUG=apogeu:* node ./bin/apogeu --start",
+    "start": "cross-env TEMPLATE=template node ./bin/apogeu --start",
+    "start:debug": "cross-env TEMPLATE=template DEBUG=apogeu:* node ./bin/apogeu --start",
     "eslint": "eslint . --ext .js"
   },
   "files": [
@@ -30,6 +30,7 @@
     "commander": "^2.9.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
+    "cross-env": "^3.1.4",
     "debug": "^2.6.1",
     "express": "^4.14.1",
     "gulp": "^3.9.1",
