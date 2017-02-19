@@ -1,17 +1,27 @@
+const debug = require('debug')('apogeu:mongoose');
 const mongoose = require('mongoose');
 const log = require('winston');
+const mongooseTimestamps = require('mongoose-timestamp');
+
 const envs = require('./envs');
 
+const { timestamps, mongodb, node_env } = envs;
+
+debug(`mongoose timestamps: ${timestamps}`);
+
+if (timestamps) mongoose.plugin(mongooseTimestamps);
+
 module.exports = () => new Promise((resolve, reject) => {
-  const url = envs.mongodb;
+  const debugMongoose = node_env !== 'production';
+  debug(`debug mongoose: ${debugMongoose}`);
 
-  mongoose.set('debug', envs.node_env !== 'production');
+  mongoose.set('debug', debugMongoose);
 
-  mongoose.connect(url);
+  mongoose.connect(mongodb);
 
   mongoose.Promise = Promise;
 
-  mongoose.connection.on('connected', () => log.info(`Mongoose default connection open to ${url}`));
+  mongoose.connection.on('connected', () => log.info(`Mongoose default connection open to ${mongodb}`));
 
   mongoose.connection.on('error', err => reject(`Mongoose default connection error: ${err}`));
 

@@ -2,7 +2,6 @@ const debug = require('debug')('apogeu:models');
 const path = require('path');
 const pluralize = require('pluralize');
 const capitalize = require('capitalize');
-const Promise = require('bluebird');
 
 const paths = require('./paths');
 const addGlobal = require('./addGlobal');
@@ -22,7 +21,10 @@ const exportModel = (model, name) => {
 module.exports = () => new Promise((resolve, reject) => {
   readDir(paths.models, '.js')
     .then((models) => {
-      models.forEach(model => exportModel(model, resolveModelName(model)));
+      models.forEach((model) => {
+        const modelName = resolveModelName(model);
+        exportModel(model, modelName);
+      });
       resolve();
     })
     .catch(reject);

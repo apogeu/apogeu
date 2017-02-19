@@ -31,6 +31,7 @@
     "helmet": "^3.4.0",
     "methods": "^1.1.2",
     "mongoose": "^4.8.3",
+    "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.8.1",
     "pluralize": "^3.1.0",
     "winston": "^2.3.1"
