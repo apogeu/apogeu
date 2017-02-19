@@ -2,6 +2,6 @@
 
 const debug = require('debug')('apogeu:new');
 
-module.exports = (projectName) => {
-  console.log(projectName);
+module.exports = (project_name) => {
+  debug(`project name: ${project_name}`);
 };

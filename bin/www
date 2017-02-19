@@ -5,16 +5,19 @@ const express = require('express');
 const log = require('winston');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 
 const app = express();
 
+const paths = require('../src/paths');
 const envs = require('../src/envs');
 const mongoose = require('../src/mongoose');
 const models = require('../src/models');
 const services = require('../src/services');
 const controllers = require('../src/controllers');
 const routes = require('../src/routes');
+const errorHandler = require('../src/errorHandler');
 
 debug('init apogeu');
 
@@ -22,6 +25,12 @@ app.use(helmet());
 app.use(logger(envs.logger));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.set('views', paths.views);
+app.set('view engine', 'pug');
+
+app.use('/public', express.static(paths.public.this));
 
 mongoose()
   .then(models)
@@ -29,10 +38,11 @@ mongoose()
   .then(controllers)
   .then(routes)
   .then((router) => {
-    require('./gulp');
+    require('../src/gulp');
     app.use(router);
     app.listen(envs.port, () => {
       log.info(`Apogeu listening on port ${envs.port}`);
     });
+    errorHandler(app);
   })
   .catch(log.error);

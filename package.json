@@ -10,12 +10,14 @@
   "scripts": {
     "start": "TEMPLATE=template node ./bin/apogeu --start",
     "start:debug": "TEMPLATE=template DEBUG=apogeu:* node ./bin/apogeu --start",
-    "eslint": "eslint ./bin/* ./src/*"
+    "eslint": "eslint . --ext .js"
   },
   "files": [
     "bin/",
-    "config/",
+    "src/",
+    "template/",
     ".gitignore",
+    ".gitmodules",
     "README.md",
     "LICENSE"
   ],
@@ -26,16 +28,20 @@
     "body-parser": "^1.16.1",
     "capitalize": "^1.0.0",
     "commander": "^2.9.0",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
     "debug": "^2.6.1",
     "express": "^4.14.1",
     "gulp": "^3.9.1",
     "gulp-stylus": "^2.6.0",
     "helmet": "^3.4.0",
+    "method-override": "^2.3.7",
     "methods": "^1.1.2",
     "mongoose": "^4.8.3",
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.8.1",
     "pluralize": "^3.1.0",
+    "pug": "^2.0.0-beta11",
     "winston": "^2.3.1"
   },
   "devDependencies": {

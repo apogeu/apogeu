@@ -12,6 +12,7 @@ module.exports = {
   models: getPath('app/models'),
   controllers: getPath('app/controllers'),
   services: getPath('app/services'),
+  views: getPath('app/views'),
   config: {
     routes: getPath('config/routes'),
     envs: getPath('config/envs'),
@@ -20,6 +21,7 @@ module.exports = {
     stylesheets: getPath('app/assets/stylesheets'),
   },
   public: {
-    stylesheets: getPath('app/public/stylesheets'),
+    this: getPath('public'),
+    stylesheets: getPath('public/stylesheets'),
   },
 };
