@@ -17,7 +17,7 @@ try {
   fs.statSync(envsPath);
   envs = require(envsPath);
 } catch (e) {
-  debug(`${envsPath} not fouond`);
+  debug(`${envsPath} not found`);
   envs = {};
 }
 
