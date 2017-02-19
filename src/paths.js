@@ -1,17 +1,19 @@
 const debug = require('debug')('apogeu:paths');
 
 const getPath = (folder) => {
-  const testPath = process.env.TEST_PATH || '';
+  const template = process.env.TEMPLATE;
   let path = `./${folder}`;
-  if (testPath) path = `./${testPath}/${folder}`;
-  debug(`path: ${path}`);
+  if (template) path = `./${template}/${folder}`;
+  debug(path);
   return path;
 };
 
 module.exports = {
   models: getPath('app/models'),
   controllers: getPath('app/controllers'),
+  services: getPath('app/services'),
   config: {
     routes: getPath('config/routes'),
+    envs: getPath('config/envs'),
   },
 };
