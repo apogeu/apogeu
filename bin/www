@@ -49,4 +49,7 @@ mongoose()
     });
     errorHandler(app);
   })
-  .catch(log.error);
+  .catch((err) => {
+    console.error(err.stack);
+    process.exit(1);
+  });
