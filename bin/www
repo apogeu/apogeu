@@ -29,6 +29,7 @@ mongoose()
   .then(controllers)
   .then(routes)
   .then((router) => {
+    require('./gulp');
     app.use(router);
     app.listen(envs.port, () => {
       log.info(`Apogeu listening on port ${envs.port}`);

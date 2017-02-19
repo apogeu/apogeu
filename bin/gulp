@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const gulp = require('gulp');
+const stylus = require('gulp-stylus');
+
+const paths = require('../src/paths');
+
+gulp.src(`${paths.assets.stylesheets}/**`)
+  .pipe(stylus({
+    'include css': true,
+    compress: true,
+  }))
+  .pipe(gulp.dest(paths.public.stylesheets));

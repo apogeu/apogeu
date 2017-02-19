@@ -16,4 +16,10 @@ module.exports = {
     routes: getPath('config/routes'),
     envs: getPath('config/envs'),
   },
+  assets: {
+    stylesheets: getPath('app/assets/stylesheets'),
+  },
+  public: {
+    stylesheets: getPath('app/public/stylesheets'),
+  },
 };
