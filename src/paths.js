@@ -13,6 +13,7 @@ module.exports = {
   controllers: getPath('app/controllers'),
   services: getPath('app/services'),
   views: getPath('app/views'),
+  i18n: getPath('app/i18n'),
   config: {
     routes: getPath('config/routes'),
     envs: getPath('config/envs'),
