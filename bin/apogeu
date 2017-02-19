@@ -12,7 +12,7 @@ const version = require('../package.json').version;
 program
   .version(version)
   .option('-s, --start', 'Start project')
-  .option('-n, --new [name]', 'New project', '.')
+  .option('-n, --new [name]', 'New project')
   .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
