@@ -10,7 +10,7 @@ const defaultEnvs = {
   mongodb: `mongodb://localhost:27017/${getBase('').replace(/.*\//, '')}`,
 };
 
-const envsPath = getBase('config/envs');
+const envsPath = getBase('config/envs.js');
 let envs;
 
 try {
