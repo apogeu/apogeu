@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('apogeu:bin');
-const express = require('express');
-const log = require('winston');
+const debug = require('debug')('apogeu:apogeu');
+const program = require('commander');
 
-const app = express();
-
-const models = require('../src/models');
-const controllers = require('../src/controllers');
-const routes = require('../src/routes');
+require('../src/bluebird');
 
 debug('init apogeu');
-models()
-  .then(controllers)
-  .then(routes)
-  .then((router) => {
-    app.use(router);
-    const port = 3000;
-    app.listen(port, () => {
-      log.info(`Apogeu listening on port ${port}`);
-    });
-  })
-  .catch(log.error);
+
+const version = require('../package.json').version;
+
+program
+  .version(version)
+  .option('-s, --start', 'Start project')
+  .option('-n, --new [name]', 'New project', '.')
+  .parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+  process.exit(1);
+}
+
+if (program.start) require('./www');
+if (program.new) require('./new')(program.new);
