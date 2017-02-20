@@ -1,29 +1,35 @@
 #!/usr/bin/env node
 
-const program = require('commander');
+const argv = require('yargs')
+  .help('help')
+  .alias('help', 'h', '?')
+  .version()
+  .alias('version', 'v')
+  .option('start', {
+    alias: 's',
+    describe: 'Start project',
+  })
+  .option('new', {
+    alias: 'n',
+    describe: 'New project',
+  })
+  .option('create', {
+    alias: 'c',
+    describe: 'Create model structure',
+  })
+  .option('debug', {
+    alias: 'd',
+    describe: 'Execute command in debug mode',
+  })
+  .argv;
 
 require('../src/bluebird');
 
-const version = require('../package.json').version;
-
-program
-  .version(version)
-  .option('-s, --start', 'Start project')
-  .option('-n, --new [name]', 'New project')
-  .option('-c, --create <model>', 'Create model structure')
-  .option('-d, --debug', 'Execute command in debug mode')
-  .parse(process.argv);
-
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
-  process.exit(1);
-}
-
-if (program.debug) process.env.DEBUG = 'apogeu:*';
+if (argv.debug) process.env.DEBUG = 'apogeu:*';
 const debug = require('debug')('apogeu:apogeu');
 
 debug('init apogeu');
 
-if (program.start) require('./www');
-if (program.new) require('./new')(program.new === true ? undefined : program.new);
-if (program.create) require('./create')(program.create);
+if (argv.start) require('./www');
+if (argv.new) require('./new')(argv.new === true ? undefined : argv.new);
+if (argv.create) require('./create')(argv.create);
