@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-const argv = require('yargs')
-  .help('help')
-  .alias('help', 'h', '?')
+const yargs = require('yargs');
+
+const argv = yargs
+  .help('h')
+  .alias('help', 'h')
   .version()
   .alias('version', 'v')
   .option('start', {
@@ -21,7 +23,20 @@ const argv = require('yargs')
     alias: 'd',
     describe: 'Execute command in debug mode',
   })
+  .wrap(yargs.terminalWidth())
   .argv;
+
+const required = ['start', 'new', 'create'];
+let showHelp = true;
+
+required.forEach((field) => {
+  if (showHelp) showHelp = !argv[field];
+});
+
+if (showHelp) {
+  yargs.showHelp();
+  process.exit(1);
+}
 
 require('../src/bluebird');
 
