@@ -6,8 +6,8 @@ const request = require('request');
 const unzip = require('unzip');
 const createDir = require('./createDir');
 
-module.exports = (projectFolder) => new Promise((resolve, reject) => {
-  debug(`downloading sources`);
+module.exports = projectFolder => new Promise((resolve, reject) => {
+  debug('downloading sources');
 
   request('https://github.com/apogeu/apogeu/archive/master.zip')
     .pipe(unzip.Parse())
