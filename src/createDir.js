@@ -2,6 +2,7 @@ const debug = require('debug')('apogeu:createDir');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
+const log = require('winston');
 
 module.exports = (dir, overwrite) => {
   debug(`create dir: ${dir}`);
@@ -12,6 +13,6 @@ module.exports = (dir, overwrite) => {
     }
     mkdirp.sync(dir);
   } catch (ex) {
-    console.error(ex.stack);
+    log.error(ex.stack);
   }
 };
