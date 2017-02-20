@@ -8,7 +8,7 @@ module.exports = projectFolder => new Promise((resolve, reject) => {
   debug('creating package file');
 
   const apppkg = {
-    name: path.basename(projectFolder),
+    name: path.basename(path.resolve(projectFolder)),
     version: '0.0.0',
     description: '',
     dependencies: {
