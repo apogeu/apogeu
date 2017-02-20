@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('apogeu:apogeu');
 const program = require('commander');
 
 require('../src/bluebird');
@@ -21,7 +20,8 @@ if (!process.argv.slice(2).length) {
 
 if (program.debug) process.env.DEBUG = 'apogeu:*';
 
+const debug = require('debug')('apogeu:apogeu');
 debug('init apogeu');
 
 if (program.start) require('./www');
-if (program.new) require('./new')(program.new);
+if (program.new) require('./new')(program.new === true ? undefined : program.new);
