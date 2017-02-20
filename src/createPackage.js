@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const clipkg = require('../package.json');
 
-module.exports = (projectFolder) => new Promise((resolve, reject) => {
+module.exports = projectFolder => new Promise((resolve, reject) => {
   debug('creating package file');
 
   const apppkg = {
