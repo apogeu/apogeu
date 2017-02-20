@@ -50,6 +50,6 @@ mongoose()
     errorHandler(app);
   })
   .catch((err) => {
-    console.error(err.stack);
+    log.error(err.stack);
     process.exit(1);
   });
