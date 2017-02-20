@@ -4,6 +4,8 @@ const debug = require('debug')('apogeu:create');
 const path = require('path');
 const capitalize = require('capitalize');
 const Promise = require('bluebird');
+const log = require('winston');
+
 const paths = require('../src/paths');
 const renderTemplate = require('../src/renderTemplate');
 const saveTemplate = require('../src/saveTemplate');
@@ -29,7 +31,7 @@ module.exports = (modelName) => {
   ])
     .then(() => debug(`${modelName} structure created`))
     .catch((err) => {
-      console.error(err.stack);
+      log.error(err.stack);
       process.exit(1);
     });
 };
