@@ -5,7 +5,7 @@ const spawn = require('child_process').spawn;
 const which = require('which');
 const createDir = require('../src/createDir');
 
-module.exports = (projectFolder) => new Promise((resolve) => {
+module.exports = projectFolder => new Promise((resolve) => {
   debug('installing app dependencies');
 
   // node_modules folder must exist in order to --prefix work
