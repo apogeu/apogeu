@@ -43,6 +43,7 @@
     "mongoose": "^4.8.3",
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.8.1",
+    "mustache": "^2.3.0",
     "pluralize": "^3.1.0",
     "pug": "^2.0.0-beta11",
     "request": "^2.79.0",

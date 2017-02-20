@@ -12,6 +12,7 @@ module.exports = (projectFolder) => new Promise((resolve, reject) => {
     version: '0.0.0',
     description: '',
     dependencies: {
+      bluebird: clipkg.dependencies.bluebird,
       mongoose: clipkg.dependencies.mongoose,
     },
   };

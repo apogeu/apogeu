@@ -10,6 +10,7 @@ program
   .version(version)
   .option('-s, --start', 'Start project')
   .option('-n, --new [name]', 'New project')
+  .option('-c, --create <model>', 'Create model structure')
   .option('-d, --debug', 'Execute command in debug mode')
   .parse(process.argv);
 
@@ -25,3 +26,4 @@ debug('init apogeu');
 
 if (program.start) require('./www');
 if (program.new) require('./new')(program.new === true ? undefined : program.new);
+if (program.create) require('./create')(program.create);

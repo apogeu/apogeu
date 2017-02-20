@@ -14,7 +14,7 @@ module.exports = (projectFolder) => new Promise((resolve) => {
   const npm = `"${which.sync('npm')}"`;
   const proc = spawn(npm, ['install', projectFolder, '--prefix', projectFolder], { shell: true });
   proc.stdout.on('data', data => debug(data.toString()));
-  proc.on('close', code => resolve);
+  proc.on('close', resolve);
 
   process.on('exit', () => proc.kill());
   process.on('SIGINT', () => proc.kill());
