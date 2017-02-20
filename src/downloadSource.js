@@ -1,5 +1,4 @@
 const debug = require('debug')('apogeu:download');
-const Promise = require('bluebird');
 const path = require('path');
 const fs = require('fs');
 const request = require('request');

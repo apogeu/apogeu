@@ -1,6 +1,5 @@
 const debug = require('debug')('apogeu:saveTemplate');
 const fs = require('fs');
-const Promise = require('bluebird');
 const getBase = require('../src/getBase');
 
 module.exports = (template, filePath) => new Promise((resolve, reject) => {

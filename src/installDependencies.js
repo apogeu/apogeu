@@ -1,6 +1,5 @@
 const debug = require('debug')('apogeu:installDependencies');
 const path = require('path');
-const Promise = require('bluebird');
 const spawn = require('child_process').spawn;
 const which = require('which');
 const createDir = require('../src/createDir');

@@ -1,5 +1,4 @@
 const debug = require('debug')('apogeu:createPackage');
-const Promise = require('bluebird');
 const fs = require('fs');
 const path = require('path');
 const clipkg = require('../package.json');

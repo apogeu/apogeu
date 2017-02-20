@@ -1,3 +1,4 @@
+const debug = require('debug')('apogeu:debug');
 const Promise = require('bluebird');
 
 Promise.config({
@@ -7,3 +8,4 @@ Promise.config({
 });
 
 global.Promise = Promise;
+debug('global.Promise = require("bluebird")');

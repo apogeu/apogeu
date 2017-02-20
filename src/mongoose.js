@@ -9,13 +9,13 @@ const { timestamps, mongodb, node_env } = envs;
 
 debug(`mongoose timestamps: ${timestamps}`);
 
+mongoose.Promise = Promise;
+
 if (timestamps) mongoose.plugin(mongooseTimestamps);
 
 module.exports = () => new Promise((resolve, reject) => {
   const debugMongoose = node_env !== 'production';
   debug(`debug mongoose: ${debugMongoose}`);
-
-  mongoose.Promise = Promise;
 
   mongoose.set('debug', debugMongoose);
 
