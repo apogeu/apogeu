@@ -23,7 +23,7 @@ module.exports = () => new Promise((resolve, reject) => {
 
   mongoose.connection.on('connected', () => log.info(`Mongoose default connection open to ${mongodb}`));
 
-  mongoose.connection.on('error', err => reject(`Mongoose default connection error: ${err}`));
+  mongoose.connection.on('error', err => reject(err));
 
   mongoose.connection.on('disconnected', () => log.info('Mongoose default connection disconnected'));
 
@@ -34,7 +34,7 @@ module.exports = () => new Promise((resolve, reject) => {
 
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      reject('Mongoose default connection disconnected through app termination');
+      reject(new Error('Mongoose default connection disconnected through app termination'));
       process.exit(0);
     });
   });
