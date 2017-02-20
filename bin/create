@@ -4,7 +4,6 @@ const debug = require('debug')('apogeu:create');
 const path = require('path');
 const capitalize = require('capitalize');
 const pluralize = require('pluralize');
-const Promise = require('bluebird');
 const log = require('winston');
 
 const paths = require('../src/paths');
