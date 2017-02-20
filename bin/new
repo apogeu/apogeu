@@ -10,7 +10,7 @@ const createPackage = require('../src/createPackage');
 const installDependencies = require('../src/installDependencies');
 
 module.exports = (project_name) => {
-  const projectFolder = project_name;
+  const projectFolder = project_name || '.';
   project_name = path.basename(path.resolve(project_name));
 
   debug(`project name: ${project_name}`);

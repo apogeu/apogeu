@@ -25,5 +25,5 @@ const debug = require('debug')('apogeu:apogeu');
 debug('init apogeu');
 
 if (program.start) require('./www');
-if (program.new) require('./new')(program.new);
+if (program.new) require('./new')(program.new === true ? undefined : program.new);
 if (program.create) require('./create')(program.create);
