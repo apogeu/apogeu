@@ -2,41 +2,24 @@
 
 const yargs = require('yargs');
 
+const debugModule = {
+  debug: {
+    alias: 'd',
+    describe: 'Execute command in debug mode',
+    default: false,
+  },
+};
+
 const argv = yargs
   .help('h')
   .alias('help', 'h')
   .version()
   .alias('version', 'v')
-  .option('start', {
-    alias: 's',
-    describe: 'Start project',
-  })
-  .option('new', {
-    alias: 'n',
-    describe: 'New project',
-  })
-  .option('create', {
-    alias: 'c',
-    describe: 'Create model structure',
-  })
-  .option('debug', {
-    alias: 'd',
-    describe: 'Execute command in debug mode',
-  })
-  .wrap(yargs.terminalWidth())
+  .command('start', 'Start project', debugModule)
+  .command('new <project_name>', 'New project', debugModule)
+  .command('create <project_name>', 'Create model structure', debugModule)
+  .demandCommand(1, 'You need at least one command before moving on')
   .argv;
-
-const required = ['start', 'new', 'create'];
-let showHelp = true;
-
-required.forEach((field) => {
-  if (showHelp) showHelp = !argv[field];
-});
-
-if (showHelp) {
-  yargs.showHelp();
-  process.exit(1);
-}
 
 require('../src/bluebird');
 
@@ -45,6 +28,22 @@ const debug = require('debug')('apogeu:apogeu');
 
 debug('init apogeu');
 
-if (argv.start) require('./www');
-if (argv.new) require('./new')(argv.new === true ? undefined : argv.new);
-if (argv.create) require('./create')(argv.create);
+const command = argv._[0];
+
+debug(`command: ${command}`);
+
+switch (command) {
+  case 'start':
+    require('./www');
+    break;
+  case 'new':
+    require('./new')(argv.project_name);
+    break;
+  case 'create':
+    require('./create')(argv.project_name);
+    break;
+  default:
+    yargs.showHelp();
+    process.exit(1);
+    break;
+}
