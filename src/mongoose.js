@@ -34,7 +34,7 @@ module.exports = () => new Promise((resolve, reject) => {
 
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      reject(new Error('Mongoose default connection disconnected through app termination'));
+      log.info('Mongoose default connection disconnected through app termination');
       process.exit(0);
     });
   });
