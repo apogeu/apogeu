@@ -22,11 +22,11 @@ module.exports = (modelName) => {
 
   debug(`creating structure for ${modelName} model`);
 
-  const model = renderTemplate('model', modelName);
-  const controller = renderTemplate('controller', modelName);
-  const service = renderTemplate('service', modelName);
-
   const modelNamePlural = pluralize.plural(modelName);
+
+  const model = renderTemplate('model', modelName);
+  const controller = renderTemplate('controller', modelNamePlural);
+  const service = renderTemplate('service', modelName);
 
   Promise.all([
     saveTemplate(model, path.join(paths.models, getFilename(modelName))),
