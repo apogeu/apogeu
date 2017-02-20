@@ -15,11 +15,11 @@ module.exports = () => new Promise((resolve, reject) => {
   const debugMongoose = node_env !== 'production';
   debug(`debug mongoose: ${debugMongoose}`);
 
+  mongoose.Promise = Promise;
+
   mongoose.set('debug', debugMongoose);
 
   mongoose.connect(mongodb);
-
-  mongoose.Promise = Promise;
 
   mongoose.connection.on('connected', () => log.info(`Mongoose default connection open to ${mongodb}`));
 
