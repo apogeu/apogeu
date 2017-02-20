@@ -14,7 +14,7 @@ module.exports = {
   services: getPath('app/services'),
   views: getPath('app/views'),
   i18n: getPath('app/i18n'),
-  scaffold: getPath('app/scaffold'),
+  scaffold: getPath('config/scaffold'),
   config: {
     routes: getPath('config/routes'),
     envs: getPath('config/envs'),
