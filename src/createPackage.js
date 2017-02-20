@@ -17,7 +17,7 @@ module.exports = projectFolder => new Promise((resolve, reject) => {
     },
   };
 
-  fs.writeFile(path.join(projectFolder, 'package.json'), JSON.stringify(apppkg, null, 4), (err) => {
+  fs.writeFile(path.join(projectFolder, 'package.json'), JSON.stringify(apppkg, null, 2), (err) => {
     if (err) return reject(err);
     resolve();
   });
