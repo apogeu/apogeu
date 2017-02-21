@@ -16,7 +16,7 @@ const argv = yargs
   .version()
   .alias('version', 'v')
   .command('start', 'Start project', defaultOptions)
-  .command('new <project_name>', 'New project', defaultOptions)
+  .command('new [project_name]', 'New project', defaultOptions)
   .command('create <modelName>', 'Create model structure', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
   .argv;
