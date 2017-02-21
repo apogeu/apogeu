@@ -20,6 +20,7 @@ const controllers = require('../src/controllers');
 const routes = require('../src/routes');
 const errorHandler = require('../src/errorHandler');
 const exist = require('../src/exist');
+const getBase = require('../src/getBase');
 
 i18n.configure({ directory: paths.i18n });
 
@@ -59,6 +60,7 @@ database()
     app.listen(envs.port, () => {
       log.info(`Apogeu listening on port ${envs.port}`);
     });
+    require(getBase(paths.index));
   })
   .catch((err) => {
     log.error(err.stack);
