@@ -13,6 +13,8 @@ module.exports = projectFolder => new Promise((resolve, reject) => {
     dependencies: {
       bluebird: clipkg.dependencies.bluebird,
       mongoose: clipkg.dependencies.mongoose,
+      'mongoose-timestamp': clipkg.dependencies['mongoose-timestamp'],
+      winston: clipkg.dependencies.winston,
     },
   };
 
