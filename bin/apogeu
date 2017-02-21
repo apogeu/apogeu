@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+const log = require('winston');
 
 const defaultOptions = {
   debug: {
@@ -10,6 +11,8 @@ const defaultOptions = {
   },
 };
 
+const types = ['all', 'controller', 'service', 'model'];
+
 const argv = yargs
   .help('h')
   .alias('help', 'h')
@@ -17,8 +20,9 @@ const argv = yargs
   .alias('version', 'v')
   .command('start', 'Start project', defaultOptions)
   .command('new <project_name>', 'New project', defaultOptions)
-  .command('create <modelName>', 'Create model structure', defaultOptions)
+  .command(`create <type> [${types.join('|')}] <model_name>`, 'Create model structure', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
+  .wrap(null)
   .argv;
 
 if (argv.debug) process.env.DEBUG = 'apogeu:*';
@@ -40,7 +44,12 @@ switch (command) {
     require('./new')(argv.project_name);
     break;
   case 'create':
-    require('./create')(argv.modelName);
+    if (!types.includes(argv.type)) {
+      yargs.showHelp();
+      log.error(`Type needs to be ${types.join('|')}`);
+      process.exit(1);
+    }
+    require('./create')(argv.type, argv.model_name);
     break;
   default:
     yargs.showHelp();

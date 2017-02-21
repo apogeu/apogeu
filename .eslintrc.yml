@@ -12,3 +12,4 @@ rules:
   no-restricted-syntax: off
   camelcase: off
   no-undef: off
+  default-case: off

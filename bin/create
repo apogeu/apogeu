@@ -11,8 +11,9 @@ const renderTemplate = require('../src/renderTemplate');
 const saveTemplate = require('../src/saveTemplate');
 
 const getFilename = fileName => `${fileName.toLowerCase()}.js`;
+const getPath = (dir, fileName) => path.join(dir, getFilename(fileName));
 
-module.exports = (modelName) => {
+module.exports = (type, modelName) => {
   const validator = new RegExp('^[A-Za-z][a-zA-Z0-9]+$');
   modelName = capitalize(modelName.split(' ')[0]);
   if (!validator.test(modelName)) {
@@ -23,15 +24,31 @@ module.exports = (modelName) => {
 
   const modelNamePlural = pluralize.plural(modelName);
 
+  const structure = [];
+
   const model = renderTemplate('model', modelName);
   const controller = renderTemplate('controller', modelNamePlural);
   const service = renderTemplate('service', modelName);
 
-  Promise.all([
-    saveTemplate(model, path.join(paths.models, getFilename(modelName))),
-    saveTemplate(controller, path.join(paths.controllers, getFilename(modelNamePlural))),
-    saveTemplate(service, path.join(paths.services, getFilename(modelNamePlural))),
-  ])
+  switch (type) {
+    case 'all':
+      structure.push(saveTemplate(model, getPath(paths.models, modelName)));
+      structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
+      structure.push(saveTemplate(service, getPath(paths.services, modelNamePlural)));
+      break;
+    case 'controller':
+      structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
+      break;
+    case 'service':
+      structure.push(saveTemplate(service, getPath(paths.services, modelNamePlural)));
+      break;
+    case 'model':
+      structure.push(saveTemplate(model, getPath(paths.models, modelName)));
+      break;
+  }
+
+  Promise
+    .all(structure)
     .then(() => debug(`${modelName} structure created`))
     .catch((err) => {
       log.error(err.stack);
