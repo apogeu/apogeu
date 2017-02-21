@@ -1,5 +1,3 @@
-const debug = require('debug')('apogeu:paths');
-
 module.exports = {
   models: 'app/models',
   controllers: 'app/controllers',
