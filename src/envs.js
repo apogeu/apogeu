@@ -5,9 +5,7 @@ const getBase = require('./getBase');
 const defaultEnvs = {
   node_env: 'development',
   port: 3000,
-  timestamps: true,
   logger: 'dev',
-  mongodb: `mongodb://localhost:27017/${getBase('').replace(/.*\//, '')}`,
 };
 
 const envsPath = getBase('config/envs.js');
@@ -24,5 +22,9 @@ try {
 envs = Object.assign(defaultEnvs, envs);
 
 debug(envs);
+
+const { node_env } = envs;
+debug(`process.env.NODE_ENV = ${node_env}`);
+process.env.NODE_ENV = node_env;
 
 module.exports = envs;
