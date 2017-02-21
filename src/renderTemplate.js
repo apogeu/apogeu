@@ -6,7 +6,7 @@ const Mustache = require('mustache');
 const paths = require('../src/paths');
 const getBase = require('../src/getBase');
 
-const scaffoldPath = getBase(paths.scaffold);
+const scaffoldPath = getBase(paths.config.scaffold);
 const readTemplate = template => fs.readFileSync(path.join(scaffoldPath, template)).toString();
 
 module.exports = (template, model) => {
