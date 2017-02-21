@@ -9,6 +9,7 @@ module.exports = {
     routes: 'config/routes',
     envs: 'config/envs',
     scaffold: 'config/scaffold',
+    database: 'config/database',
   },
   assets: {
     stylesheets: 'app/assets/stylesheets',

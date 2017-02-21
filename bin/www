@@ -13,7 +13,7 @@ const app = express();
 
 const paths = require('../src/paths');
 const envs = require('../src/envs');
-const mongoose = require('../src/mongoose');
+const database = require('../src/database');
 const models = require('../src/models');
 const services = require('../src/services');
 const controllers = require('../src/controllers');
@@ -36,7 +36,7 @@ app.set('view engine', 'pug');
 
 app.use('/public', express.static(paths.public.this));
 
-mongoose()
+database()
   .then(models)
   .then(services)
   .then(controllers)
