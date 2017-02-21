@@ -21,12 +21,12 @@ const argv = yargs
   .demandCommand(1, 'You need at least one command before moving on')
   .argv;
 
-require('../src/bluebird');
-
 if (argv.debug) process.env.DEBUG = 'apogeu:*';
 const debug = require('debug')('apogeu:apogeu');
 
 debug('init apogeu');
+
+require('../src/bluebird');
 
 const command = argv._[0];
 
