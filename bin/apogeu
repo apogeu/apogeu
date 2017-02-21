@@ -19,7 +19,12 @@ const argv = yargs
   .version()
   .alias('version', 'v')
   .command('start', 'Start project', defaultOptions)
-  .command('new [project_name]', 'New project', defaultOptions)
+  .command('new [project_name]', 'New project', Object.assign(defaultOptions, {
+    api: {
+      describe: 'New project with only API structure',
+      default: false,
+    },
+  }))
   .command(`create <type> [${types.join('|')}] <model_name>`, 'Create model structure', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
   .wrap(null)
@@ -38,10 +43,10 @@ debug(`command: ${command}`);
 
 switch (command) {
   case 'start':
-    require('./www');
+    require('./www')(argv.api);
     break;
   case 'new':
-    require('./new')(argv.project_name);
+    require('./new')(argv.project_name, argv.api);
     break;
   case 'create':
     if (!types.includes(argv.type)) {

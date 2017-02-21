@@ -9,15 +9,16 @@ const download = require('../src/downloadSource');
 const createPackage = require('../src/createPackage');
 const installDependencies = require('../src/installDependencies');
 
-module.exports = (project_name = '.') => {
+module.exports = (project_name = '.', api = false) => {
   const projectFolder = project_name;
   project_name = path.basename(path.resolve(project_name));
 
   debug(`project name: ${project_name}`);
+  if (api) debug('api structure');
 
   createDir(projectFolder, true);
 
-  download(projectFolder)
+  download(projectFolder, api)
     .then(() => createPackage(projectFolder))
     .then(() => installDependencies(projectFolder))
     .then(() => debug(`${project_name} app created`))
