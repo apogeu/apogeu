@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 
-const debugModule = {
+const defaultOptions = {
   debug: {
     alias: 'd',
     describe: 'Execute command in debug mode',
@@ -15,9 +15,9 @@ const argv = yargs
   .alias('help', 'h')
   .version()
   .alias('version', 'v')
-  .command('start', 'Start project', debugModule)
-  .command('new <project_name>', 'New project', debugModule)
-  .command('create <modelName>', 'Create model structure', debugModule)
+  .command('start', 'Start project', defaultOptions)
+  .command('new <project_name>', 'New project', defaultOptions)
+  .command('create <modelName>', 'Create model structure', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
   .argv;
 
