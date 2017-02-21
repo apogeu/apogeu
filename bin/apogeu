@@ -43,7 +43,7 @@ debug(`command: ${command}`);
 
 switch (command) {
   case 'start':
-    require('./www')(argv.api);
+    require('./www');
     break;
   case 'new':
     require('./new')(argv.project_name, argv.api);
