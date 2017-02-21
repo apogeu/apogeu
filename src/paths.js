@@ -1,4 +1,5 @@
 module.exports = {
+  index: 'index',
   models: 'app/models',
   controllers: 'app/controllers',
   services: 'app/services',
