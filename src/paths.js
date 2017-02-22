@@ -3,6 +3,7 @@ module.exports = {
   models: 'app/models',
   controllers: 'app/controllers',
   services: 'app/services',
+  middlewares: 'app/middlewares',
   views: 'app/views',
   i18n: 'app/i18n',
   config: {
