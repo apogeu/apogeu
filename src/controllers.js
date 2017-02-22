@@ -7,23 +7,19 @@ const paths = require('./paths');
 const addGlobal = require('./addGlobal');
 const readDir = require('./readDir');
 
-const resolveControllerName = (name) => {
+const resolveName = (name) => {
   const plural = pluralize.plural(path.basename(name, '.js'));
   const controllerName = `${capitalize(plural)}Controller`;
   debug(`resolve controller name: ${controllerName}`);
   return controllerName;
 };
 
-const exportController = (controller, name) => {
-  addGlobal(`${paths.controllers}/${controller}`, name);
-};
-
 module.exports = () => new Promise((resolve, reject) => {
   readDir(paths.controllers, '.js')
     .then((controllers) => {
       controllers.forEach((controller) => {
-        const controllerName = resolveControllerName(controller);
-        return exportController(controller, controllerName);
+        const controllerName = resolveName(controller);
+        addGlobal(`${paths.controllers}/${controller}`, controllerName);
       });
       resolve();
     })

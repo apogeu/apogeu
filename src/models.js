@@ -7,23 +7,19 @@ const paths = require('./paths');
 const addGlobal = require('./addGlobal');
 const readDir = require('./readDir');
 
-const resolveModelName = (name) => {
+const resolveName = (name) => {
   const singular = pluralize.singular(path.basename(name, '.js'));
   const modelName = `${capitalize(singular)}Model`;
   debug(`resolve model name: ${modelName}`);
   return modelName;
 };
 
-const exportModel = (model, name) => {
-  addGlobal(`${paths.models}/${model}`, name);
-};
-
 module.exports = () => new Promise((resolve, reject) => {
   readDir(paths.models, '.js')
     .then((models) => {
       models.forEach((model) => {
-        const modelName = resolveModelName(model);
-        exportModel(model, modelName);
+        const modelName = resolveName(model);
+        addGlobal(`${paths.models}/${model}`, modelName);
       });
       resolve();
     })
