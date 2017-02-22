@@ -16,6 +16,7 @@ const envs = require('../src/envs');
 const database = require('../src/database');
 const models = require('../src/models');
 const services = require('../src/services');
+const middlewares = require('../src/middlewares');
 const controllers = require('../src/controllers');
 const routes = require('../src/routes');
 const errorHandler = require('../src/errorHandler');
@@ -44,11 +45,10 @@ if (exist(paths.public.this)) {
   app.use('/public', express.static(paths.public.this));
 }
 
-errorHandler(app, exist(paths.views));
-
 database()
   .then(models)
   .then(services)
+  .then(middlewares)
   .then(controllers)
   .then(routes)
   .then((router) => {
@@ -61,6 +61,7 @@ database()
       log.info(`Apogeu listening on port ${envs.port}`);
     });
     require(getBase(paths.index));
+    errorHandler(app, exist(paths.views));
   })
   .catch((err) => {
     log.error(err.stack);
