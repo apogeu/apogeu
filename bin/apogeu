@@ -39,8 +39,6 @@ require('../src/bluebird');
 
 const command = argv._[0];
 
-debug(`command: ${command}`);
-
 switch (command) {
   case 'start':
     require('./www');
