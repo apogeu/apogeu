@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const i18n = require('i18n');
+const cluster = require('cluster');
 
 const app = express();
 
@@ -57,9 +58,15 @@ database()
       require('../src/gulp');
     }
     app.use(router);
-    app.listen(envs.port, () => {
-      log.info(`Apogeu listening on port ${envs.port}`);
-    });
+
+    if (cluster.isMaster) {
+      for (let i = 0; i < envs.cluster; i += 1) cluster.fork();
+      cluster.on('exit', worker => log.error(`worker ${worker.process.pid} died`));
+    } else {
+      app.listen(envs.port, () => {
+        log.info(`Apogeu listening on port ${envs.port}`);
+      });
+    }
     require(getBase(paths.index));
     errorHandler(app, exist(paths.views));
   })
