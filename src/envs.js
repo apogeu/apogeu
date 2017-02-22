@@ -1,11 +1,14 @@
 const debug = require('debug')('apogeu:envs');
 const fs = require('fs');
+const os = require('os');
+
 const getBase = require('./getBase');
 
 const defaultEnvs = {
   node_env: 'development',
   port: 3000,
   logger: 'dev',
+  cluster: os.cpus().length,
 };
 
 const envsPath = getBase('config/envs.js');
