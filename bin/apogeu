@@ -11,7 +11,7 @@ const defaultOptions = {
   },
 };
 
-const types = ['all', 'controller', 'service', 'model'];
+const types = ['all', 'middleware', 'controller', 'service', 'model'];
 
 const argv = yargs
   .help('h')

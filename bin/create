@@ -24,17 +24,21 @@ module.exports = (type, modelName) => {
 
   const modelNamePlural = pluralize.plural(modelName);
 
-  const structure = [];
-
   const model = renderTemplate('model', modelName);
   const controller = renderTemplate('controller', modelNamePlural);
   const service = renderTemplate('service', modelName);
+  const middleware = renderTemplate('middleware', modelName);
+
+  const structure = [];
 
   switch (type) {
     case 'all':
       structure.push(saveTemplate(model, getPath(paths.models, modelName)));
       structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
       structure.push(saveTemplate(service, getPath(paths.services, modelNamePlural)));
+      break;
+    case 'middleware':
+      structure.push(saveTemplate(middleware, getPath(paths.middlewares, modelName)));
       break;
     case 'controller':
       structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
