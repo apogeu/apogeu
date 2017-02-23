@@ -1,76 +1,18 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('apogeu:www');
-const express = require('express');
 const log = require('winston');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const helmet = require('helmet');
-const i18n = require('i18n');
 const cluster = require('cluster');
+const path = require('path');
 
-const app = express();
-
-const paths = require('../src/paths');
 const envs = require('../src/envs');
-const database = require('../src/database');
-const models = require('../src/models');
-const services = require('../src/services');
-const middlewares = require('../src/middlewares');
-const controllers = require('../src/controllers');
-const routes = require('../src/routes');
-const errorHandler = require('../src/errorHandler');
-const exist = require('../src/exist');
-const getBase = require('../src/getBase');
 
-i18n.configure({ directory: paths.i18n });
+const master = path.join(__dirname, '..', 'src/app.js');
 
-app.use(helmet());
-app.use(logger(envs.logger));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(i18n.init);
+cluster.setupMaster({ exec: master });
 
-if (exist(paths.views)) {
-  debug('enable cookie parser');
-  app.use(cookieParser());
+for (let i = 0; i < envs.cluster; i += 1) cluster.fork();
 
-  debug('enable view engine pug');
-  app.set('views', paths.views);
-  app.set('view engine', 'pug');
-}
-
-if (exist(paths.public.this)) {
-  debug('enable public static');
-  app.use('/public', express.static(paths.public.this));
-}
-
-database()
-  .then(models)
-  .then(services)
-  .then(middlewares)
-  .then(controllers)
-  .then(routes)
-  .then((router) => {
-    if (exist(paths.assets.stylesheets)) {
-      debug('enable gulp stylus');
-      require('../src/gulp');
-    }
-    app.use(router);
-
-    if (cluster.isMaster) {
-      for (let i = 0; i < envs.cluster; i += 1) cluster.fork();
-      cluster.on('exit', worker => log.error(`worker ${worker.process.pid} died`));
-    } else {
-      app.listen(envs.port, () => {
-        log.info(`Apogeu listening on port ${envs.port}`);
-      });
-    }
-    require(getBase(paths.index));
-    errorHandler(app, exist(paths.views));
-  })
-  .catch((err) => {
-    log.error(err.stack);
-    process.exit(1);
-  });
+cluster.on('exit', (worker) => {
+  log.info(`Worker ${worker.id} died`);
+  cluster.fork();
+});
