@@ -8,48 +8,59 @@ const getBase = require('./getBase');
 const router = express.Router();
 
 const isMethod = method => methods.includes(method);
-
-const isRoute = route => route.charAt(0) === '/';
-
 const isFunction = func => typeof func === 'function';
+const isArray = array => Array.isArray(array);
 
 const getRoutes = () => {
   debug('get routes');
   return require(getBase(paths.config.routes));
 };
 
-const resolveAddress = (address, routes) => {
-  debug('resolve address');
-  const splited = address.split(' ');
-  let method = splited[0];
-  let route = splited[1];
-  const target = routes[address];
+const getMethod = (options = []) => options.filter(isMethod)[0];
+const getRoute = (options = []) => options.filter(route => route[0] === '/')[0];
 
-  if (!isMethod(method) && isRoute(method)) {
-    debug(`method ${method} is route`);
-    if (isFunction(target)) {
-      route = method;
-      method = 'get';
-    }
-  }
-
-  debug(`method: ${method}`);
-  debug(`route: ${route}`);
-  return { method, route, target };
+const createRoute = (method = 'get', route = '/', callback = []) => {
+  debug(`${method} ${route}`);
+  router[method](route, callback);
 };
 
-const createRoute = (data) => {
-  const { method, route, target } = data;
-  debug(`create route: ${method} ${route}`);
-  router[method](route, target);
+const resolveRoute = (address, routes) => {
+  const splited = address.split(' ').filter(s => s);
+
+  const method = getMethod(splited);
+  const route = getRoute(splited);
+  const target = routes[address];
+
+  if (isFunction(target)) {
+    return createRoute(method, route, target);
+  }
+
+  if (isArray(target)) {
+    if (isFunction(target[0])) {
+      return createRoute(method, route, target);
+    }
+
+    target.forEach((t) => {
+      const callback = [];
+      const { middlewares, controller } = t;
+      if (middlewares) {
+        if (isArray(middlewares)) {
+          callback.push(...middlewares);
+        } else {
+          callback.push(middlewares);
+        }
+      }
+      if (controller) callback.push(controller);
+      createRoute(t.method, route, callback);
+    });
+  }
 };
 
 module.exports = () => new Promise((resolve, reject) => {
   try {
     const routes = getRoutes();
     for (const address in routes) {
-      const data = resolveAddress(address, routes);
-      createRoute(data);
+      resolveRoute(address, routes);
     }
     resolve(router);
   } catch (e) {
