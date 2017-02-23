@@ -24,10 +24,6 @@ try {
 
 envs = Object.assign(defaultEnvs, envs);
 
-debug(envs);
-
-const { node_env } = envs;
-debug(`process.env.NODE_ENV = ${node_env}`);
-process.env.NODE_ENV = node_env;
+process.env.NODE_ENV = envs.node_env;
 
 module.exports = envs;
