@@ -1,20 +1,22 @@
 const debug = require('debug')('apogeu:installDependencies');
 const path = require('path');
-const spawn = require('child_process').spawn;
-const which = require('which');
 const createDir = require('../src/createDir');
+const npm = require('npm');
 
-module.exports = projectFolder => new Promise((resolve) => {
+module.exports = projectFolder => new Promise((resolve, reject) => {
   debug('installing app dependencies');
 
-  // node_modules folder must exist in order to --prefix work
   createDir(path.join(projectFolder, 'node_modules'), true);
 
-  const npm = `"${which.sync('npm')}"`;
-  const proc = spawn(npm, ['install', projectFolder, '--prefix', projectFolder], { shell: true });
-  proc.stdout.on('data', data => debug(data.toString()));
-  proc.on('close', resolve);
+  npm.load({ prefix: projectFolder }, (err) => {
+    if (err) return reject(err);
 
-  process.on('exit', () => proc.kill());
-  process.on('SIGINT', () => proc.kill());
+    npm.commands.install([projectFolder], (error) => {
+      if (err) return reject(error);
+      debug('dependencies installed');
+      resolve();
+    });
+
+    npm.on('log', message => debug(message));
+  });
 });

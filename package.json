@@ -21,7 +21,6 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "Daniel Rôhers Moura <rohersmoura@gmail.com> (https://github.com/danielrohers)",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.7",
@@ -43,12 +42,12 @@
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.8.1",
     "mustache": "^2.3.0",
+    "npm": "^4.3.0",
     "pluralize": "^3.1.0",
     "pug": "^2.0.0-beta11",
     "request": "^2.79.0",
     "rimraf": "^2.6.0",
     "unzip": "^0.1.11",
-    "which": "^1.2.12",
     "winston": "^2.3.1",
     "yargs": "^6.6.0"
   },
