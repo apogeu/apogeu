@@ -18,7 +18,7 @@ That's it? Yes!
 ## Usage
 > apogeu new [project_name]
 
-Create a new project. If no project name is given, Apogeu will use current folder as the project folder and it's name as project's name.
+Creates a new project. If no project name is given, Apogeu will use current folder as the project folder and it's name as project's name.
 
 > create <type> [all|middleware|controller|service|model] <model_name>
 
