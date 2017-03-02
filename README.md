@@ -1,7 +1,7 @@
 # apogeu-cli
 
-[![Build Status](https://travis-ci.org/apogeu/apogeu-cli.svg?branch=master)](https://travis-ci.org/apogeu/apogeu-cli)
-[![Code Climate](https://codeclimate.com/github/apogeu/apogeu-cli/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu-cli)
+[![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu)
+[![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu)
 
 Apogeu is a multi platform rails like framework made for Node.js.
 
