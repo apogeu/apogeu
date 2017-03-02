@@ -8,12 +8,12 @@ const createDir = require('./createDir');
 module.exports = (projectFolder, api = false) => new Promise((resolve, reject) => {
   debug('downloading sources');
 
-  request('https://github.com/apogeu/apogeu/archive/master.zip')
+  request('https://github.com/apogeu/apogeu-structure/archive/master.zip')
     .pipe(unzip.Parse())
     .on('entry', (entry) => {
       if (entry.type === 'Directory') return entry.autodrain();
 
-      const filePath = path.join(projectFolder, entry.path.replace('apogeu-master/', ''));
+      const filePath = path.join(projectFolder, entry.path.replace('apogeu-structure-master/', ''));
       const isView = filePath.split('/').map(val => ['views', 'assets', 'public'].includes(val)).includes(true);
       if (api && isView) return;
       createDir(path.dirname(filePath));
