@@ -8,16 +8,12 @@
     "apogeu": "./bin/apogeu"
   },
   "scripts": {
-    "start": "cross-env TEMPLATE=template node ./bin/apogeu --start",
-    "start:debug": "cross-env TEMPLATE=template DEBUG=apogeu:* node ./bin/apogeu --start",
     "eslint": "eslint . --ext .js"
   },
   "files": [
     "bin/",
     "src/",
-    "template/",
     ".gitignore",
-    ".gitmodules",
     "README.md",
     "LICENSE"
   ],
@@ -28,7 +24,6 @@
     "capitalize": "^1.0.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
-    "cross-env": "^3.1.4",
     "debug": "^2.6.1",
     "express": "^4.14.1",
     "gulp": "^3.9.1",
