@@ -1,4 +1,4 @@
-# apogeu-cli
+# apogeu
 
 [![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu)
 [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu)
@@ -12,7 +12,7 @@ Model structures are created from mustache templates that may be changed if need
 Apogeu projects follows modern conventional patterns and should be easy to use, understand and extend.
 
 ## Installation
-> npm install apogeu-cli
+> npm install apogeu -g
 
 That's it? Yes!
 
@@ -40,4 +40,4 @@ Starts the project contained in the current folder.
     - Shows help.
 
 ## License
-[Licence](https://raw.githubusercontent.com/apogeu/apogeu-cli/master/LICENSE) © Apogeu
+[Licence](https://raw.githubusercontent.com/apogeu/apogeu/master/LICENSE) © Apogeu
