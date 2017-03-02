@@ -21,7 +21,7 @@ module.exports = (project_name = '.', api = false) => {
   download(projectFolder, api)
     .then(() => createPackage(projectFolder))
     .then(() => installDependencies(projectFolder))
-    .then(() => debug(`${project_name} app created`))
+    .then(() => log.info(`${project_name} app created`))
     .catch((err) => {
       log.error(err.stack);
       process.exit(1);
