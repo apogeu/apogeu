@@ -40,4 +40,4 @@ Starts the project contained in the current folder.
     - Shows help.
 
 ## License
-[Licence](https://raw.githubusercontent.com/apogeu/apogeu/master/LICENSE) © Apogeu
+[Licence](LICENSE) © Apogeu
