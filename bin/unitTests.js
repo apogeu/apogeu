@@ -14,17 +14,17 @@ const controllers = require('../src/controllers');
 const testFolder = getBase(paths.test.unit);
 
 const runTests = () => {
-  debug('running unit tests');
+  logger.info('running unit tests');
 
   const mocha = new Mocha();
 
   function addFiles(files) {
     files.forEach((file) => {
+      debug(`adding ${file} file`);
       mocha.addFile(path.join(testFolder, file));
     });
   }
   function execute() {
-    logger.info('running tests');
     mocha.run((failures) => {
       process.on('exit', () => {
         process.exit(failures);

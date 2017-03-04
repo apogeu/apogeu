@@ -11,18 +11,18 @@ const app = require('../src/app');
 const testFolder = getBase(paths.test.integration);
 
 const runTests = () => {
-  debug('running integration tests');
+  logger.info('running integration tests');
 
   const mocha = new Mocha();
 
   function addFiles(files) {
     files.forEach((file) => {
+      debug(`adding ${file} file`);
       mocha.addFile(path.join(testFolder, file));
     });
   }
 
   function execute() {
-    logger.info('running tests');
     mocha.run((failures) => {
       process.on('exit', () => {
         process.exit(failures);
