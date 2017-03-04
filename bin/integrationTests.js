@@ -1,4 +1,4 @@
-const debug = require('debug')('apogeu:unitTests');
+const debug = require('debug')('apogeu:integrationTests');
 const path = require('path');
 const Mocha = require('mocha');
 
