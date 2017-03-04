@@ -16,6 +16,13 @@ module.exports = projectFolder => new Promise((resolve, reject) => {
       'mongoose-timestamp': clipkg.dependencies['mongoose-timestamp'],
       winston: clipkg.dependencies.winston,
     },
+    devDependencies: {
+      assert: clipkg.dependencies.assert,
+      mocha: clipkg.dependencies.mocha,
+      eslint: clipkg.devDependencies.eslint,
+      'eslint-config-airbnb-base': clipkg.devDependencies['eslint-config-airbnb-base'],
+      'eslint-plugin-import': clipkg.devDependencies['eslint-plugin-import'],
+    }
   };
 
   fs.writeFile(path.join(projectFolder, 'package.json'), JSON.stringify(apppkg, null, 2), (err) => {

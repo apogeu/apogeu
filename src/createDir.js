@@ -2,7 +2,8 @@ const debug = require('debug')('apogeu:createDir');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
-const log = require('winston');
+
+const logger = require('../src/logger');
 
 module.exports = (dir, overwrite) => {
   try {
@@ -13,6 +14,6 @@ module.exports = (dir, overwrite) => {
     debug(dir);
     mkdirp.sync(dir);
   } catch (ex) {
-    log.error(ex.stack);
+    logger.error(ex.stack);
   }
 };

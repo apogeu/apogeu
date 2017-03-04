@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 
 const debug = require('debug')('apogeu:app');
+const EventEmitter = require('events');
+const util = require('util');
 const express = require('express');
-const log = require('winston');
-const logger = require('morgan');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const i18n = require('i18n');
 
+util.inherits(express, EventEmitter);
+
 const app = express();
 
+const logger = require('../src/logger');
 const paths = require('./paths');
 const envs = require('./envs');
 const database = require('./database');
@@ -26,7 +30,7 @@ const getBase = require('./getBase');
 i18n.configure({ directory: paths.i18n });
 
 app.use(helmet());
-app.use(logger(envs.logger));
+app.use(morgan(envs.logger));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(i18n.init);
@@ -47,7 +51,7 @@ if (exist(paths.public.this)) {
 
 require('./logEnvs');
 
-database()
+module.exports = database()
   .then(models)
   .then(services)
   .then(middlewares)
@@ -63,10 +67,10 @@ database()
     errorHandler(app, exist(paths.views));
 
     app.listen(envs.port, () => {
-      log.info(`Apogeu listening on port ${envs.port}`);
+      logger.info(`Application listening on port ${envs.port}`);
     });
   })
   .catch((err) => {
-    log.error(err.stack);
+    logger.error(err.stack);
     process.exit(1);
   });

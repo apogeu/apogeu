@@ -4,5 +4,5 @@ const getBase = require('./getBase');
 module.exports = (path, name) => {
   const pathBase = getBase(path);
   debug(`${name} - ${pathBase}`);
-  global[name] = require(pathBase);
+  return (global[name] = require(pathBase));
 };

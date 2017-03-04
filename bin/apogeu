@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-const log = require('winston');
+
+const logger = require('../src/logger');
 
 const defaultOptions = {
   debug: {
@@ -26,6 +27,7 @@ const argv = yargs
     },
   }))
   .command(`create <type> [${types.join('|')}] <model_name>`, 'Create model structure', defaultOptions)
+  .command('test [test_type] [all|unit|integration]', 'Run project tests', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
   .wrap(null)
   .argv;
@@ -49,13 +51,25 @@ switch (command) {
   case 'create':
     if (!types.includes(argv.type)) {
       yargs.showHelp();
-      log.error(`Type needs to be ${types.join('|')}`);
+      logger.error(`Type needs to be ${types.join('|')}`);
       process.exit(1);
     }
     require('./create')(argv.type, argv.model_name);
     break;
+  case 'test':
+    switch (argv.test_type) {
+      case 'unit':
+        require('./unitTests');
+        break;
+      case 'integration':
+        require('./integrationTests');
+        break;
+      default:
+        require('./unitTests');
+        require('./integrationTests');
+    }
+    break;
   default:
     yargs.showHelp();
     process.exit(1);
-    break;
 }

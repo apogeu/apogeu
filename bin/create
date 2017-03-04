@@ -4,8 +4,8 @@ const debug = require('debug')('apogeu:create');
 const path = require('path');
 const capitalize = require('capitalize');
 const pluralize = require('pluralize');
-const log = require('winston');
 
+const logger = require('../src/logger');
 const paths = require('../src/paths');
 const renderTemplate = require('../src/renderTemplate');
 const saveTemplate = require('../src/saveTemplate');
@@ -53,9 +53,9 @@ module.exports = (type, modelName) => {
 
   Promise
     .all(structure)
-    .then(() => debug(`${modelName} structure created`))
+    .then(() => logger.info(`${modelName} structure created`))
     .catch((err) => {
-      log.error(err.stack);
+      logger.error(err.stack);
       process.exit(1);
     });
 };

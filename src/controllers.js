@@ -17,11 +17,11 @@ const resolveName = (name) => {
 module.exports = () => new Promise((resolve, reject) => {
   readDir(paths.controllers, '.js')
     .then((controllers) => {
-      controllers.forEach((controller) => {
+      controllers = controllers.map((controller) => {
         const controllerName = resolveName(controller);
-        addGlobal(`${paths.controllers}/${controller}`, controllerName);
+        return addGlobal(`${paths.controllers}/${controller}`, controllerName);
       });
-      resolve();
+      resolve(controllers);
     })
     .catch(reject);
 });

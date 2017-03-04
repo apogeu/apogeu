@@ -60,3 +60,4 @@ typings/
 # Intellij
 /.idea/
 /apogeu-cli.iml
+*.iml

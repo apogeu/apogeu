@@ -6,6 +6,11 @@ module.exports = {
   middlewares: 'app/middlewares',
   views: 'app/views',
   i18n: 'app/i18n',
+  test: {
+    this: 'test',
+    unit: 'test/unit',
+    integration: 'test/integration/',
+  },
   config: {
     this: 'config',
     routes: 'config/routes',

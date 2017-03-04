@@ -17,11 +17,11 @@ const resolveName = (name) => {
 module.exports = () => new Promise((resolve, reject) => {
   readDir(paths.models, '.js')
     .then((models) => {
-      models.forEach((model) => {
+      models = models.map((model) => {
         const modelName = resolveName(model);
-        addGlobal(`${paths.models}/${model}`, modelName);
+        return addGlobal(`${paths.models}/${model}`, modelName);
       });
-      resolve();
+      resolve(models);
     })
     .catch(reject);
 });

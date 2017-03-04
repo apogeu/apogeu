@@ -2,7 +2,7 @@
 
 const debug = require('debug')('apogeu:new');
 const path = require('path');
-const log = require('winston');
+const logger = require('../src/logger');
 
 const createDir = require('../src/createDir');
 const download = require('../src/downloadSource');
@@ -21,9 +21,9 @@ module.exports = (project_name = '.', api = false) => {
   download(projectFolder, api)
     .then(() => createPackage(projectFolder))
     .then(() => installDependencies(projectFolder))
-    .then(() => log.info(`${project_name} app created`))
+    .then(() => logger.info(`${project_name} app created`))
     .catch((err) => {
-      log.error(err.stack);
+      logger.error(err.stack);
       process.exit(1);
     });
 };

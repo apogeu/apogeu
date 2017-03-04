@@ -29,6 +29,10 @@ Creates a project structure based on the given model's name.
 
 Starts the project contained in the current folder.
 
+> apogeu test
+
+Run app tests.
+
 ### Options
 * `--version, -v`
     - Shows your apogeu-cli version.

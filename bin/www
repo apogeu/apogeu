@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const log = require('winston');
 const cluster = require('cluster');
 const path = require('path');
 
+const logger = require('../src/logger');
 const envs = require('../src/envs');
 
 const master = path.join(__dirname, '..', 'src/app.js');
@@ -13,6 +13,6 @@ cluster.setupMaster({ exec: master });
 for (let i = 0; i < envs.cluster; i += 1) cluster.fork();
 
 cluster.on('exit', (worker) => {
-  log.info(`Worker ${worker.id} died`);
+  logger.info(`Worker ${worker.id} died`);
   cluster.fork();
 });
