@@ -11,7 +11,7 @@ const app = require('../src/app');
 const testFolder = getBase(paths.test.integration);
 
 const runTests = () => {
-  debug('running unit tests');
+  debug('running integration tests');
 
   const mocha = new Mocha();
 
