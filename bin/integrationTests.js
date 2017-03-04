@@ -23,7 +23,7 @@ const runTests = () => {
 
   function execute() {
     logger.info('running tests');
-    mocha.run(failures => {
+    mocha.run((failures) => {
       process.on('exit', () => {
         process.exit(failures);
       });

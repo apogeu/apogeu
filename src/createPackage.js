@@ -22,7 +22,7 @@ module.exports = projectFolder => new Promise((resolve, reject) => {
       eslint: clipkg.devDependencies.eslint,
       'eslint-config-airbnb-base': clipkg.devDependencies['eslint-config-airbnb-base'],
       'eslint-plugin-import': clipkg.devDependencies['eslint-plugin-import'],
-    }
+    },
   };
 
   fs.writeFile(path.join(projectFolder, 'package.json'), JSON.stringify(apppkg, null, 2), (err) => {
