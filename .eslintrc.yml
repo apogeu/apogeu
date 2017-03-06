@@ -13,3 +13,4 @@ rules:
   camelcase: off
   no-undef: off
   default-case: off
+  no-underscore-dangle: off
