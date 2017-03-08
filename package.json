@@ -31,8 +31,6 @@
     "gulp-stylus": "^2.6.0",
     "helmet": "^3.4.1",
     "i18n": "^0.8.3",
-    "istanbul": "^0.4.5",
-    "istanbul-middleware": "^0.2.2",
     "method-override": "^2.3.7",
     "methods": "^1.1.2",
     "mkdirp": "^0.5.1",
