@@ -9,7 +9,11 @@ const getBase = require('../src/getBase');
 const scaffoldPath = getBase(paths.config.scaffold);
 const readTemplate = template => fs.readFileSync(path.join(scaffoldPath, template)).toString();
 
-module.exports = (template, model) => {
+module.exports = (template, model, crud = false) => {
+  debug(`crud: ${crud}`);
+
+  if (crud) template = `${template}Crud`;
+
   debug(`reading ${template} template file`);
 
   template = readTemplate(template);

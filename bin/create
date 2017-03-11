@@ -13,7 +13,41 @@ const saveTemplate = require('../src/saveTemplate');
 const getFilename = fileName => `${fileName.toLowerCase()}.js`;
 const getPath = (dir, fileName) => path.join(dir, getFilename(fileName));
 
-module.exports = (type, modelName) => {
+const getTemplate = (options) => {
+  const { type, name, crud, dir } = options;
+  const template = renderTemplate(type, name, crud);
+  return saveTemplate(template, getPath(dir, name));
+};
+
+const getTemplateModel = (name, crud) => getTemplate({
+  type: 'model',
+  dir: paths.models,
+  name,
+  crud,
+});
+
+const getTemplateController = (name, crud) => getTemplate({
+  type: 'controller',
+  dir: paths.controllers,
+  name: pluralize.plural(name),
+  crud,
+});
+
+const getTemplateService = (name, crud) => getTemplate({
+  type: 'service',
+  dir: paths.services,
+  name: pluralize.plural(name),
+  crud,
+});
+
+const getTemplateMiddleware = (name, crud) => getTemplate({
+  type: 'middleware',
+  dir: paths.middlewares,
+  name,
+  crud,
+});
+
+module.exports = (type, modelName, crud) => {
   const validator = new RegExp('^[A-Za-z][a-zA-Z0-9]+$');
   modelName = capitalize(modelName.split(' ')[0]);
   if (!validator.test(modelName)) {
@@ -22,32 +56,26 @@ module.exports = (type, modelName) => {
 
   debug(`creating structure for ${modelName} model`);
 
-  const modelNamePlural = pluralize.plural(modelName);
-
-  const model = renderTemplate('model', modelName);
-  const controller = renderTemplate('controller', modelNamePlural);
-  const service = renderTemplate('service', modelName);
-  const middleware = renderTemplate('middleware', modelName);
-
   const structure = [];
 
   switch (type) {
     case 'all':
-      structure.push(saveTemplate(model, getPath(paths.models, modelName)));
-      structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
-      structure.push(saveTemplate(service, getPath(paths.services, modelNamePlural)));
+      structure.push(getTemplateModel(modelName, crud));
+      structure.push(getTemplateController(modelName, crud));
+      structure.push(getTemplateService(modelName, crud));
+      structure.push(getTemplateMiddleware(modelName, crud));
       break;
     case 'middleware':
-      structure.push(saveTemplate(middleware, getPath(paths.middlewares, modelName)));
+      structure.push(getTemplateMiddleware(modelName, crud));
       break;
     case 'controller':
-      structure.push(saveTemplate(controller, getPath(paths.controllers, modelNamePlural)));
+      structure.push(getTemplateController(modelName, crud));
       break;
     case 'service':
-      structure.push(saveTemplate(service, getPath(paths.services, modelNamePlural)));
+      structure.push(getTemplateService(modelName, crud));
       break;
     case 'model':
-      structure.push(saveTemplate(model, getPath(paths.models, modelName)));
+      structure.push(getTemplateModel(modelName, crud));
       break;
   }
 

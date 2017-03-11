@@ -12,6 +12,8 @@ const defaultOptions = {
   },
 };
 
+const customOptions = options => Object.assign(defaultOptions, options);
+
 const types = ['all', 'middleware', 'controller', 'service', 'model'];
 
 const argv = yargs
@@ -20,13 +22,18 @@ const argv = yargs
   .version()
   .alias('version', 'v')
   .command('start', 'Start project', defaultOptions)
-  .command('new [project_name]', 'New project', Object.assign(defaultOptions, {
+  .command('new [project_name]', 'New project', customOptions({
     api: {
       describe: 'New project with only API structure',
       default: false,
     },
   }))
-  .command(`create <type> [${types.join('|')}] <model_name>`, 'Create model structure', defaultOptions)
+  .command(`create <type> [${types.join('|')}] <model_name>`, 'Create model structure', customOptions({
+    crud: {
+      describe: 'Use CRUD scaffold',
+      default: false,
+    },
+  }))
   .command('test [test_type] [all|unit|integration]', 'Run project tests', defaultOptions)
   .demandCommand(1, 'You need at least one command before moving on')
   .wrap(null)
@@ -54,7 +61,7 @@ switch (command) {
       logger.error(`Type needs to be ${types.join('|')}`);
       process.exit(1);
     }
-    require('./create')(argv.type, argv.model_name);
+    require('./create')(argv.type, argv.model_name, argv.crud);
     break;
   case 'test':
     switch (argv.test_type) {
