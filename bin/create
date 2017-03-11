@@ -22,7 +22,7 @@ const getTemplate = (options) => {
 const getTemplateModel = (name, crud) => getTemplate({
   type: 'model',
   dir: paths.models,
-  name,
+  name: pluralize.singular(name),
   crud,
 });
 
@@ -43,7 +43,7 @@ const getTemplateService = (name, crud) => getTemplate({
 const getTemplateMiddleware = (name, crud) => getTemplate({
   type: 'middleware',
   dir: paths.middlewares,
-  name,
+  name: pluralize.singular(name),
   crud,
 });
 
