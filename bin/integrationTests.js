@@ -19,4 +19,5 @@ const error = (err) => {
 
 app
   .then(runTests)
+  .then(() => process.exit(0))
   .catch(error);
