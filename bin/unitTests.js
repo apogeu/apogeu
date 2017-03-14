@@ -16,8 +16,13 @@ const runTests = () => {
   return test(testFolder);
 };
 
+const error = (err) => {
+  logger.error(`unit test failed with error: ${err.stack}`);
+};
+
 models()
   .then(services)
   .then(middlewares)
   .then(controllers)
-  .then(runTests);
+  .then(runTests)
+  .catch(error);

@@ -8,20 +8,27 @@ module.exports = testFolder => new Promise((resolve, reject) => {
   const mocha = new Mocha();
 
   function addFiles(files) {
-    files.forEach((file) => {
-      debug(`adding ${file} file`);
-      mocha.addFile(path.join(testFolder, file));
+    return new Promise((resolve) => {
+      files.forEach((file) => {
+        debug(`adding ${file} file`);
+        mocha.addFile(path.join(testFolder, file));
+      });
+      resolve();
     });
   }
 
   function execute() {
-    mocha.run((failures) => {
-      process.on('exit', () => process.exit(failures));
+    return new Promise((resolve) => {
+      mocha.run((failures) => {
+        if (failures === 0) return resolve();
+        process.on('exit', () => process.exit(failures));
+      });
     });
   }
 
   readDir(testFolder, '.js')
     .then(addFiles)
     .then(execute)
+    .then(resolve)
     .catch(reject);
 });

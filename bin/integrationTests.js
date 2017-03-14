@@ -1,5 +1,3 @@
-// const debug = require('debug')('apogeu:integrationTests');
-
 const logger = require('../src/logger');
 const paths = require('../src/paths');
 const getBase = require('../src/getBase');
