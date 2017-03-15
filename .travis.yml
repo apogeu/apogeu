@@ -8,6 +8,8 @@ node_js:
   - 6
   - 7
 
+cache: yarn
+
 install:
   - npm install
 
