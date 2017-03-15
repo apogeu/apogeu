@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu)
 [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu)
-[![Dependency Status](https://david-dm.org/apogeu/apogeu/dev-status.svg)](https://david-dm.org/apogeu/apogeu#info=dependencies)
+[![Dependency Status](https://david-dm.org/apogeu/apogeu.svg)](https://david-dm.org/apogeu/apogeu#info=dependencies)
 [![devDependency Status](https://david-dm.org/apogeu/apogeu/dev-status.svg)](https://david-dm.org/apogeu/apogeu#info=devDependencies)
 [![npm download](https://img.shields.io/npm/dt/apogeu.svg)](https://www.npmjs.com/package/apogeu)
 [![npm version](https://img.shields.io/npm/v/apogeu.svg)](https://badge.fury.io/js/apogeu)
