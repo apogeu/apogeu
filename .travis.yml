@@ -19,3 +19,6 @@ before_script:
 script:
   - npm run eslint
   - apogeu new my-project --debug
+  - cd my-project
+  - apogeu test unit
+  - apogeu test integration
