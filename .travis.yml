@@ -1,9 +1,19 @@
 language: node_js
+
+services:
+  - mongodb
+
 node_js:
   - 5
   - 6
   - 7
+
 install:
   - npm install
+
+before_script:
+  - npm link
+
 script:
   - npm run eslint
+  - apogeu new my-project
