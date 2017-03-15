@@ -35,7 +35,7 @@
     "methods": "^1.1.2",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
-    "mongoose": "^4.8.5",
+    "mongoose": "^4.9.0",
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.8.1",
     "mustache": "^2.3.0",
